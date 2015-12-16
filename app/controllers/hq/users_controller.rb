@@ -1,7 +1,7 @@
 class Hq::UsersController < ApplicationController
   before_action :set_hq_user, only: [:show, :edit, :update, :destroy]
   before_filter :gate_keeper
-  skip_before_filter :gate_keeper, only: [:index]
+  skip_before_filter :gate_keeper, only: [:index, :new, :create]
 
   # GET /hq/users
   # GET /hq/users.json
