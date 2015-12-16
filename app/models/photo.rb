@@ -7,7 +7,7 @@ class Photo < ActiveRecord::Base
     medium: '300x300>',
     large: '400',
     xlarge: '800'
-  },
+  }#,
   # :storage => :s3,
   # :s3_credentials => "#{Rails.root}/config/s3.yml",
   # :bucket => 'edpdxprod'
