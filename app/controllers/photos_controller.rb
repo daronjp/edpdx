@@ -52,7 +52,7 @@ class PhotosController < ApplicationController
       end
       # product[0].save
       @photo.save
-      redirect_to @photo, notice: 'Photo was successfully created.'
+      redirect_to :back, notice: 'Photo was successfully created.'
      else
        render action: 'new'
     end

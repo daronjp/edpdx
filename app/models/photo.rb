@@ -12,7 +12,7 @@ class Photo < ActiveRecord::Base
   :s3_credentials => "#{Rails.root}/config/s3.yml",
   # :path => ":attachment/:id/:style.:extension",
   # :path => '/:class/:attachment/:id_partition/:style/:filename',
-  :bucket => 'edpdx'
+  :bucket => 'edpdxprod'
 
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 end

@@ -93,7 +93,7 @@ Rails.application.configure do
   :url =>':s3_domain_url',
   :path => '/:class/:attachment/:id_partition/:style/:filename',
   :s3_credentials => {
-    :bucket => ENV['EDPDX'],
+    :bucket => 'edpdxprod',
     :access_key_id => ENV['ACCESS_KEY_ID'],
     :secret_access_key => ENV['SECRET_ACCESS_KEY']
   }
