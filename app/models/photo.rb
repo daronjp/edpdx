@@ -8,11 +8,9 @@ class Photo < ActiveRecord::Base
     large: '400',
     xlarge: '800'
   },
-  :storage => :s3,
-  :s3_credentials => "#{Rails.root}/config/s3.yml",
-  # :path => ":attachment/:id/:style.:extension",
-  # :path => '/:class/:attachment/:id_partition/:style/:filename',
-  :bucket => 'edpdxprod'
+  # :storage => :s3,
+  # :s3_credentials => "#{Rails.root}/config/s3.yml",
+  # :bucket => 'edpdxprod'
 
   validates_attachment_content_type :avatar, :content_type => /\Aimage\/.*\Z/
 end
