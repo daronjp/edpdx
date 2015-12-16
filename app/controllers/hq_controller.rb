@@ -1,0 +1,2 @@
+class HqController < ApplicationController
+end

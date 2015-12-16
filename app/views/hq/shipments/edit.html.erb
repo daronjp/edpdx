@@ -1,0 +1,51 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-11">
+    <%= form_tag hq_shipment_path, :method => :patch do %>
+      <% if @cart.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@cart.errors.count, "error") %> prohibited this cart from being saved:</h2>
+
+          <ul>
+          <% @cart.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+          </ul>
+        </div>
+      <% end %>
+      <h3>Cart <%= @cart.id %></h3>
+      <%= @cart.customer.email %>
+      <h5>Address:</h5>
+      <%= @cart.customer.given_name %><br>
+      <%= @cart.customer.address_1 %><br>
+      <%= @cart.customer.city %>, <%= @cart.customer.state %> <%= @cart.customer.zip %>
+      <p>
+
+      </p>
+
+      <h5>Cart Details:</h5>
+      Items:
+      <% @cart.cart_items.each do |item| %>
+        <%= item.product.name %><br>
+      <% end %>
+
+      Purchased: <%= @cart.purchase %><br>
+      Total: $<%= sprintf('%.2f', @total) %>
+      <p>
+
+      </p>
+      <div class="field">
+        <%= label_tag :tracking_id %>
+        <%= text_field_tag(:tracking_id, "", placeholder: "Tracking ID") %><br>
+        <%= label_tag :shipping_vendor %>
+        <%= select_tag :shipping_vendor, options_for_select(['US Postal Service', 'FedEx', 'UPS']), :include_blank => true %>
+        <%# text_field_tag(hq_shipment[tracking_id], "", placeholder: "Tracking ID") %><br>
+      </div>
+      <div class="actions">
+        <%= submit_tag "Email Customer" %> Note: Submitting will email customer and mark purchase as 'shipped'
+      </div>
+    <% end %>
+  </div>

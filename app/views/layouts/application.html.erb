@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Edp</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+  <style>
+  img.checkout {
+    height: 10%;
+    width: 30%;
+  }
+  </style>
+</head>
+<body>
+
+  <% if session[:cart] %>
+    <% if session[:cart] == '' %>
+      <% cart = Cart.create(:active => 't') %>
+      <% session[:cart] = cart.id %>
+    <% else %>
+      <% unless Cart.where(:id => session[:cart])[0].active? %>
+        <% cart = Cart.create(:active => 't') %>
+        <% session[:cart] = cart.id %>
+      <% end %>
+    <% end %>
+  <% else %>
+    <% cart = Cart.create(:active => 't') %>
+    <% session[:cart] = cart.id %>
+  <% end %>
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="../">
+      edpdx.com</a>
+    </div>
+
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        <!--<li class="active">-->
+        <li class="<%= 'active' if params[:controller] == 'products' and params[:type].nil? %>">
+          <!--<a href="#">LinkActive <span class="sr-only">(current)</span></a>-->
+          <%= link_to "Products", products_path %>
+        </li>
+        <li class="<%= 'active' if params[:controller] == 'products' and params[:type] == 'cutting_boards' %>">
+          <!--<a href="#">LinkActive <span class="sr-only">(current)</span></a>-->
+          <% if params[:controller] != 'hq/users' and params[:controller] != 'hq/shipments' %>
+            <%= link_to 'Cutting Boards', controller: "products", action: "index", type: 'cutting_boards' %>
+          <% end %>
+        </li>
+        <li class="<%= 'active' if params[:controller] == 'products' and params[:type] == 'tasters' %>">
+          <!--<a href="#">LinkActive <span class="sr-only">(current)</span></a>-->
+          <% if params[:controller] != 'hq/users' and params[:controller] != 'hq/shipments' %>
+            <%= link_to 'Tasting Trays', controller: "products", action: "index", type: 'tasters' %>
+          <% end %>
+        </li>
+        <% if session[:visitor] == 'admin' %>
+          <li class="<%= 'active' if params[:controller] == 'photos' %>">
+            <%= link_to "Photos", photos_path %>
+          </li>
+        <% end %>
+        <% if session[:visitor] == 'admin' %>
+          <li class="<%= 'active' if params[:controller] == 'hq/shipments' %>">
+            <%= link_to "Shipments", hq_shipments_path %>
+          </li>
+        <% end %>
+        <% if session[:visitor] == 'admin' %>
+          <li class="<%= 'active' if params[:controller] == 'hq/users' %>">
+            <%= link_to "Users", hq_users_path %>
+          </li>
+        <% end %>
+
+      <% if session[:cart] %><li>
+
+
+        <%= link_to cart_path(session[:cart]) do %>
+          <span class="glyphicon glyphicon-shopping-cart"></span>
+          <%= CartItem.where(cart_id: session[:cart]).count %>
+          <%= session[:cart] %>
+        <% end %></li>
+      <% end %>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <% if session[:visitor] == 'admin' %>
+            <li><%= link_to "Log out", log_out_path %></li>
+        <% end %>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<%= yield %>
+
+</body>
+</html>

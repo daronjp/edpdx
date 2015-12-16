@@ -1,0 +1,18 @@
+development:
+  host: localhost
+  adapter: postgresql
+  database: edp_development
+  username:
+  password:
+
+test:
+  adapter: postgresql
+  database: edp_test
+  username: ewryan
+  password: moomoofarm
+
+production:
+  adapter: postgresql
+  database: edp_production
+  username: ewryan
+  password: moomoofarm

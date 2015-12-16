@@ -1,0 +1,50 @@
+<div class="row">
+  <div class="col-md-1"></div>
+  <div class="col-md-11">
+    <h1>Editing Product</h1>
+  </div>
+</div>
+<div class="row>">
+  <div class="col-md-1"></div>
+  <div class="col-md-4">
+    <%= render 'form' %>
+  </div>
+  <div class="col-md-3">
+    <% if @stock.count > 0 %>
+      <%# form_for(@stock) do |f| %>
+        <% @stock.each do |stock| %>
+          <%# f.radio_button :is_main %>
+          <%= image_tag stock.avatar.url(:thumb) %>
+        <% end %>
+      <%# end %>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <%= form_for(@photo, multipart: true) do |f| %>
+      <div class="field">
+        <%= f.label :avatar_file_name %>
+        <%= f.text_field :avatar_file_name %>
+      </div>
+      <div class="field">
+        <%= f.label :avatar %>
+        <%= f.file_field :avatar %>
+      </div>
+      <div class="actions">
+        <%= f.label :orientation %>
+        <%= f.select(:orientation) do %>
+          <% [['horizontal', 'horizontal'], ['vertical', 'vertical']].each do |c| -%>
+            <%= content_tag(:option, c.first, value: c.last) %>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="actions">
+        <%= f.submit 'Upload Image' %>
+        <%= f.hidden_field :product_id, :value => params[:id] %>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-3">
+    <%= link_to 'Show', @product %> |
+    <%= link_to 'Back', products_path %>
+  </div>
+</div>

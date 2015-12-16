@@ -1,0 +1,18 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Product:</strong>
+  <%= @photo.product_id %>
+</p>
+<%= @photo.avatar.url %>
+<p>
+  <strong>Image url:</strong>
+  <%= @photo.avatar.url %><br>
+  <%= @photo.avatar.url(:medium) %><br>
+
+  <%= image_tag @photo.avatar.url(:medium) %>
+  <%= image_tag @photo.avatar.url %>
+</p>
+
+<%= link_to 'Edit', edit_photo_path(@photo) %> |
+<%= link_to 'Back', photos_path %>

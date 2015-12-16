@@ -1,0 +1,2 @@
+module Hq::UsersHelper
+end

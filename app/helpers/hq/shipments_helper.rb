@@ -1,0 +1,2 @@
+module Hq::ShipmentsHelper
+end

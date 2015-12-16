@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Username:</strong>
+  <%= @hq_user.username %>
+</p>
+
+<p>
+  <strong>Password hash:</strong>
+  <%= @hq_user.password_hash %>
+</p>
+
+<p>
+  <strong>Password salt:</strong>
+  <%= @hq_user.password_salt %>
+</p>
+
+<p>
+  <strong>Is admin:</strong>
+  <%= @hq_user.is_admin %>
+</p>
+
+<%= link_to 'Edit', edit_hq_user_path(@hq_user) %> |
+<%= link_to 'Back', hq_users_path %>

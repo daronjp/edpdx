@@ -1,0 +1,60 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-11">
+      <h4>Thanks for your purchase! You will recieve an email with the details of your order.</h4>
+
+      <h4>Order Details:</h4>
+
+      <h5>Ship to:</h5>
+      <%= params[:stripeShippingName] %><br>
+      <%= params[:stripeBillingAddressLine1] %><br>
+      <%= params[:stripeShippingAddressCity] %>, <%= params[:stripeShippingAddressState] %>
+      <%= params[:stripeShippingAddressZip] %>
+    </div>
+  </div>
+  <p>
+  </p>
+  <div class="row">
+    <div class="col-md-1">
+    </div>
+    <div class="col-md-4">
+      <h5>Items:</h5>
+      <table class="table table-bordered">
+        <tr>
+          <th>
+          </th>
+          <th>
+            Item
+          </th>
+          <th>
+            Quantity
+          </th>
+          <th>
+            Price
+          </th>
+        </tr>
+        <% @items.each do |item| %>
+          <tr>
+            <td>
+              <%= image_tag item.product.photos[0]['image_url'], class: "img-responsive" %>
+            </td>
+            <td>
+              <%= item.product.name %>
+            </td>
+            <td>
+              <%= item.quantity %>
+            </td>
+            <td>
+              $<%= sprintf('%.2f', item.product.price*item.quantity) %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+      Total: $<%= params[:total] %>
+    </div>
+    <div class="col-md-7">
+    </div>
+  </div>
+</div>

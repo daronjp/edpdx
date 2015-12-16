@@ -1,0 +1,44 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+  <div class="col-sm-1">
+  </div>
+  <div class="col-sm-11">
+
+  <p>
+    <h3><%= @product.name %> - $<%= sprintf('%.2f', @product.price) %></h3>
+  </p>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-sm-1">
+  </div>
+  <div class="col-sm-7">
+    <% @photo.each do |photo| %>
+      <%= image_tag photo.avatar.url(:xlarge), class: "img-responsive" %>
+      <p>
+      </p>
+    <% end %>
+  </div>
+  <div class="col-sm-3">
+    <p>
+      <strong>Description:</strong>
+      <%= @product.description %>
+    </p>
+
+    <p>
+      <strong>Dimensions:</strong><br>
+      Height: <%= @product.height %><br>
+      Width: <%= @product.width %><br>
+      Thickness:
+      <p>
+
+      </p>
+
+
+    <a class="btn btn-success" href="/products/<%= @product.id %>/?var=add_to_cart">Add to cart<span class="glyphicon glyphicon-menu-right"></span></a>
+  </div>
+  <div class="col-sm-1">
+  </div>
+</div>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyText
+  price: 9.99
+  height: 9.99
+  width: 9.99
+  quantity: 1
+  description: MyText
+
+two:
+  name: MyText
+  price: 9.99
+  height: 9.99
+  width: 9.99
+  quantity: 1
+  description: MyText

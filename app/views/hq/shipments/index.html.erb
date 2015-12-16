@@ -1,0 +1,75 @@
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-11">
+    <h3>Orders</h3>
+    <%= link_to "To Ship", hq_shipments_path(type: "to_ship") %> <%= link_to "Shipped", hq_shipments_path(type: "shipped") %>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-1">
+  </div>
+  <div class="col-md-11">
+    <table class="table table-hover">
+      <tr>
+        <th>
+          Cart ID
+        </th>
+        <th>
+          Customer email
+        </th>
+        <th>
+          Customer Name
+        </th>
+        <th>
+          Shipping Address
+        </th>
+        <th>
+          Items
+        </th>
+        <th>
+          Total
+        </th>
+        <th>
+          Purchase
+        </th>
+        <th>
+          Shipped
+        </th>
+      </tr>
+      <% @shipment.each do |shipment| %>
+        <tr>
+          <td>
+            <%= link_to shipment.id, edit_hq_shipment_path(shipment) %>
+          </td>
+          <td>
+            <%= shipment.customer.email %>
+          </td>
+          <td>
+            <%= shipment.customer.given_name %>
+          </td>
+          <td>
+            <%= shipment.customer.address_1 %> <%= shipment.customer.city %>, <%= shipment.customer.state %> <%= shipment.customer.zip %>
+          </td>
+          <td>
+          <% total = 0 %>
+          <% shipment.cart_items.each do |item| %>
+            <%= item.product.name %><br>
+            <% total = total + item.product.price %>
+          <% end %>
+          </td>
+          <td>
+            $<%= sprintf('%.2f', total) %>
+          </td>
+          <td>
+            <%= shipment.purchase %>
+          </td>
+          <td>
+            <%= shipment.shipped %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

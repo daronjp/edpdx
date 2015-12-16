@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+<div class="row">
+  <p>
+    
+  </p>
+</div>
+<h1>Login</h1>
+
+<%= form_tag sessions_path do %>
+
+    <p>
+      <%= text_field_tag(:username, "", placeholder: "Username") %>
+      <%= password_field_tag(:password, "", placeholder: "Password") %>
+      <%= submit_tag "Log in" %>
+    </p>
+
+  <% end %>
+
+<%= link_to 'New User', new_hq_user_path %>

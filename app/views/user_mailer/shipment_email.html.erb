@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>edpdx</h1>
+    <h3>Shipment Confirmation</h3>
+    <p>
+      Thank you for shopping with us! You ordered:<p>
+      </p>
+        <% @items.each do |item| %>
+          <%= item.product.name %><br>
+        <% end %>
+    </p>
+    <h3>Your purchase has been shipped to:</h3>
+    <%= @cust.given_name %><br>
+    <%= @cust.address_1 %><br>
+    <%= @cust.city %>, <%= @cust.state %>
+    <%= @cust.zip %>
+    <p></p>
+    <%= @cart.shipping_vendor %> tracking number: <%= @cart.tracking_id %><br>
+    <%= link_to 'View your order', controller: "carts", action: "show", id: @cart.id, email: @cust.email %>
+  </body>
+</html>
