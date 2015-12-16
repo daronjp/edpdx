@@ -1,4 +1,5 @@
 class BasketsController < ApplicationController
+  before_filter :gate_keeper
   before_action :set_basket, only: [:show, :edit, :update, :destroy]
 
   # GET /baskets

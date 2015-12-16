@@ -1,4 +1,5 @@
 class ProductCategoriesController < ApplicationController
+  before_filter :gate_keeper
   before_action :set_product_category, only: [:show, :edit, :update, :destroy]
 
   # GET /product_categories

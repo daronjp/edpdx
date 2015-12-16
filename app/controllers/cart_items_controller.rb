@@ -1,4 +1,5 @@
 class CartItemsController < ApplicationController
+  before_filter :gate_keeper
   before_action :set_cart_item, only: [:show, :edit, :update, :destroy]
 
   # GET /cart_items
