@@ -79,12 +79,12 @@
           </li>
         <% end %>
 
-      <% if session[:cart] %><li>
+      <% if session[:cart] %>
 
-
+      <li class="<%= 'active' if params[:controller] == 'carts' %>">
         <%= link_to cart_path(session[:cart]) do %>
-          <span class="glyphicon glyphicon-shopping-cart"></span>
-          <%= CartItem.where(cart_id: session[:cart]).count %>
+          Your Cart
+          (<%= CartItem.where(cart_id: session[:cart]).sum(:quantity) %>)
         <% end %></li>
       <% end %>
       </ul>
