@@ -18,6 +18,13 @@
         <% end %>
       <%# end %>
     <% end %>
+    <p>
+    </p>
+    <% if @notes.count > 0 %>
+      <% @notes.each do |note| %>
+        <%= note.note %> <%= link_to 'Destroy', note, method: :delete, data: { confirm: 'Are you sure?' } %><br>
+      <% end %>
+    <% end %>
   </div>
   <div class="col-md-4">
     <%= form_for(@photo, multipart: true) do |f| %>
@@ -39,6 +46,18 @@
       </div>
       <div class="actions">
         <%= f.submit 'Upload Image' %>
+        <%= f.hidden_field :product_id, :value => params[:id] %>
+      </div>
+    <% end %>
+    <p>
+    </p>
+    <%= form_for(@product_note, multipart: true) do |f| %>
+      <div class="field">
+        <%= f.label :note %>
+        <%= f.text_field :note %>
+      </div>
+      <div class="actions">
+        <%= f.submit 'Add Product Note' %>
         <%= f.hidden_field :product_id, :value => params[:id] %>
       </div>
     <% end %>

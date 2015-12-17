@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :product_notes
   resources :product_categories
   namespace :hq do
     resources :users

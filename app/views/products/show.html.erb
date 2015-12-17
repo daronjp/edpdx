@@ -26,6 +26,17 @@
       <strong>Description:</strong>
       <%= @product.description %>
     </p>
+    <% if @product_note.count > 0 %>
+      <p>
+        <strong>Notes:</strong>
+        <ul>
+          <% @product_note.each do |product_note| %>
+            <li><%= product_note.note %></li>
+          <% end %>
+        </ul>
+      </p>
+    <% end %>
+
 
     <p>
       <strong>Dimensions:</strong><br>
