@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  controller: MyString
+  view: MyString
+  object: 1
+  ip: MyString
+
+two:
+  controller: MyString
+  view: MyString
+  object: 1
+  ip: MyString

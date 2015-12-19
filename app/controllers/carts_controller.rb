@@ -26,6 +26,13 @@ class CartsController < ApplicationController
     else
       flash[:notice] = "Cart does not exist!"
     end
+
+    unless session[:visitor] == 'admin'
+      Galileo.create(:controller => 'cart',
+                       :view => 'show',
+                       :ip => request.remote_ip,
+                       :object => session[:cart])
+    end
   end
 
   # GET /carts/new

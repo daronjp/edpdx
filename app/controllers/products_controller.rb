@@ -6,6 +6,13 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
+    unless session[:visitor] == 'admin'
+      Galileo.create(:controller => 'product',
+                       :view => 'index',
+                       :ip => request.remote_ip)
+    end
+
+
     if params[:type].nil?
       @products = Product.where("quantity > 0")
     elsif params[:type] == 'cutting_boards'
@@ -22,6 +29,14 @@ class ProductsController < ApplicationController
   # GET /products/1
   # GET /products/1.json
   def show
+    unless session[:visitor] == 'admin'
+      Galileo.create(:controller => 'product',
+                       :view => 'show',
+                       :ip => request.remote_ip,
+                       :object => params[:id])
+    end
+
+
     @photo = Photo.where(:product_id => params[:id])
     @product_note = ProductNote.where(:product_id => params[:id])
     if params[:var] == 'add_to_cart'
