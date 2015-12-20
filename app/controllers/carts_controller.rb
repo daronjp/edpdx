@@ -1,11 +1,12 @@
 class CartsController < ApplicationController
+  before_filter :gate_keeper, :only => :index
   before_action :set_cart, only: [:show, :edit, :update, :destroy]
 
   # GET /carts
   # GET /carts.json
   def index
-    #@carts = Cart.all
-    @carts = Cart.find(session[:cart])
+    @carts = Cart.all
+    #@carts = Cart.find(session[:cart])
   end
 
   # GET /carts/1
