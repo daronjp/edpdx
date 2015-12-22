@@ -12,10 +12,13 @@ class CartsController < ApplicationController
   # GET /carts/1
   # GET /carts/1.json
   def show
-    if Cart.where(:id => params[:id]).count > 0
+    basket = Cart.where(:id => params[:id])
+    if basket.count > 0#Cart.where(:id => params[:id]).count > 0
       if params[:id].to_i == session[:cart].to_i
         @items = CartItem.where(:cart_id => session[:cart]).order(:id)
         @cart = Cart.find(session[:cart])
+      elsif basket[0].active?
+        flash[:notice] = "Invalid Cart"
       else
         if Customer.find(Cart.find(params[:id]).customer_id).email == params[:email]
           @items = CartItem.where(:cart_id => params[:id])
