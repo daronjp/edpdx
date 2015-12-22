@@ -55,7 +55,7 @@
             <div class="col-md-7">
               <%= link_to product do %>
                 <% Photo.where(:product_id => product.id, :is_main => 't').each do |photo| %>
-                  <%= image_tag photo.avatar.url(:xlarge), class: "img-responsive" %>
+                  <%= image_tag photo.avatar.url(:xlarge), class: "img-responsive", alt: photo.product.name %>
                 <% end %>
               <% end %>
             </div>

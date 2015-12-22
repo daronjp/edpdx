@@ -40,7 +40,7 @@
     <div class="container">
       <div class="row">
         <p>
-          
+
         </p>
       </div>
        <div class="row">
@@ -66,7 +66,7 @@
                             <div class="item">
                           <% end %>
                             <%= link_to product_path(photo.product_id) do %>
-                              <%= image_tag photo.avatar.url(:xlarge), class: "img-full" %>
+                              <%= image_tag photo.avatar.url(:xlarge), class: "img-full", alt: photo.product.name %>
                             <% end %>
                             <% x = x + 1 %>
                          </div>

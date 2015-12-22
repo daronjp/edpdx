@@ -16,7 +16,7 @@
   </div>
   <div class="col-sm-7">
     <% @photo.each do |photo| %>
-      <%= image_tag photo.avatar.url(:xlarge), class: "img-responsive" %>
+      <%= image_tag photo.avatar.url(:xlarge), class: "img-responsive", alt: photo.product.name %>
       <p>
       </p>
     <% end %>
