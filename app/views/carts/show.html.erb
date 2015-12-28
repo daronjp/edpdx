@@ -110,6 +110,7 @@
         </article>
         <%= hidden_field_tag 'cart_id', params[:id] %>
         <%= hidden_field_tag 'total', total %>
+        <%= hidden_field_tag 'cents', (total*100).to_i %>
         <% if @cart.shipped? %>
           <%= @cart.shipping_vendor %> tracking number: <%= @cart.tracking_id %>
         <% else %>
