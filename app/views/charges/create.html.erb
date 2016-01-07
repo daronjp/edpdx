@@ -38,7 +38,9 @@
         <% @items.each do |item| %>
           <tr>
             <td>
-              <%= image_tag item.product.photos[0]['image_url'], class: "img-responsive" %>
+              <%= link_to product_path(item.product_id) do %>
+                <%= image_tag item.product.photos.where(:is_main => 't')[0].avatar.url(:medium), class: "img-responsive" %>
+              <% end %>
             </td>
             <td>
               <%= item.product.name %>
@@ -52,7 +54,7 @@
           </tr>
         <% end %>
       </table>
-      Total: $<%= params[:total] %>
+      Total: $<%= sprintf('%.2f', params[:total]) %>
     </div>
     <div class="col-md-7">
     </div>
