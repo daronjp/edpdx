@@ -1,6 +1,6 @@
 class UserMailer < ApplicationMailer
 
-  default from: 'daron@edpdx.com'
+  default from: 'support@edpdx.com'
 
     def welcome_email(cust)
       mail(to: cust.email, subject: 'Your purchase')

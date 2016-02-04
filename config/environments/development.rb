@@ -21,7 +21,7 @@ Rails.application.configure do
     :address              => 'smtp.zoho.com',
     :port                 => 587,
     :domain               => 'edpdx.com',
-    :user_name            => 'daron@edpdx.com',
+    :user_name            => 'support@edpdx.com',
     :password             => ENV['EMAIL_KEY'],
     :authentication       => :login,
     :enable_starttls_auto => true
