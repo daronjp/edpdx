@@ -16,9 +16,9 @@ class ProductsController < ApplicationController
     if params[:type].nil?
       @products = Product.where("quantity > 0")
     elsif params[:type] == 'cutting_boards'
-      @products = Product.where("quantity > 0 and product_category_id = 2")
-    elsif params[:type] == 'tasters'
       @products = Product.where("quantity > 0 and product_category_id = 1")
+    elsif params[:type] == 'tasters'
+      @products = Product.where("quantity > 0 and product_category_id = 2")
     else
       @products = Product.where("quantity > 0")
     end
