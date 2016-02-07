@@ -16,13 +16,6 @@
 <div class="row">
   <div class="col-sm-1">
   </div>
-  <div class="col-sm-7">
-    <% @photo.each do |photo| %>
-      <%= image_tag photo.avatar.url(:xlarge), class: "img-responsive", alt: photo.product.name %>
-      <p>
-      </p>
-    <% end %>
-  </div>
   <div class="col-sm-3">
     <p>
       <strong>Description:</strong>
@@ -50,6 +43,13 @@
 
 
     <a class="btn btn-success" href="/products/<%= @product.id %>/?var=add_to_cart">Add to cart<span class="glyphicon glyphicon-menu-right"></span></a>
+  </div>
+  <div class="col-sm-7">
+    <% @photo.each do |photo| %>
+      <%= image_tag photo.avatar.url(:xlarge), class: "img-responsive", alt: photo.product.name %>
+      <p>
+      </p>
+    <% end %>
   </div>
   <div class="col-sm-1">
   </div>
