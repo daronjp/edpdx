@@ -31,98 +31,48 @@
 
 <body>
 
-
-
-
-
-
-
-  <!-- Page Content -->
   <div class="container">
-    <div class="container">
-      <div class="row">
-          <p><center>
-            <%= image_tag 'logo2.png', height: '250', width: '300' %>
-                      </center>
+    <div class="row">
+      <center>
+        <%= image_tag 'logo2.png', height: '250', width: '300' %>
+      </center>
+    </div>
+
+    <% x = 1 %>
+    <% y = 1 %>
+    <% rowmax = @products.count/3 %>
+    <% @products.each do |product| %>
+      <% if x == 1 %>
+        <div class="row">
+      <% end %>
+        <div class="col-sm-4">
+          <%= link_to product do %>
+            <% Photo.where(:product_id => product.id, :is_main => 't').each do |photo| %>
+              <%= image_tag photo.avatar.url(:large), class: "img-responsive", alt: photo.product.name %>
+            <% end %>
+          <% end %>
+        </div>
+        <% if x == 3 %>
+          </div>
+          <p>
+
           </p>
-      </div>
-       <div class="row">
-           <div class="box">
-             <div class="col-sm-1">
-             </div>
-             <div class="col-sm-10 text-center">
-               <p>
+          <% x = 1 %>
+          <% y = y + 1 %>
+          <% if y > rowmax %>
+            <% break %>
+          <% end %>
+        <% else %>
+          <% x = x + 1 %>
+        <% end %>
+    <% end %>
 
-               </p>
-                 <div id="carousel-example-generic" class="carousel slide">
-                     <!-- Indicators -->
-                     <ol class="carousel-indicators">
-                         <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                         <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                         <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                     </ol>
 
-                     <!-- Wrapper for slides -->
-                     <div class="carousel-inner">
-                        <% x = 1 %>
-                        <% Photo.joins(:product).where("orientation = 'horizontal' and quantity > 0").order("RANDOM()").limit(3).each do |photo| %>
-                          <% if x == 1 %>
-                            <div class="item active">
-                          <% else %>
-                            <div class="item">
-                          <% end %>
-                            <%= link_to product_path(photo.product_id) do %>
-                              <%= image_tag photo.avatar.url(:xlarge), class: "img-full", alt: photo.product.name %>
-                            <% end %>
-                            <% if x == 1 %>
-                              <div class="container">
-                                <div class="carousel-caption">
-                                  <h1>Free shipping on all items</h1>
-                                </div>
-                              </div>
-                            <% end %>
-                            <% if x == 2 %>
-                              <div class="container">
-                                <div class="carousel-caption">
-                                  <h1>Handcrafted in Portland, Ore.</h1>
-                                </div>
-                              </div>
-                            <% end %>
-                            <% if x == 3 %>
-                              <div class="container">
-                                <div class="carousel-caption">
-                                  <h1>Since 2015</h1>
-                                </div>
-                              </div>
-                            <% end %>
-                            <% x = x + 1 %>
-                         </div>
-                       <% end %>
-                     </div>
 
-                     <!-- Controls -->
-                     <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                         <span class="icon-prev"></span>
-                     </a>
-                     <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                         <span class="icon-next"></span>
-                     </a>
-                 </div>
-             </div>
-         </div>
-         <div class="col-sm-1">
-         </div>
-       </div>
-     </div>
-   </div>
 
-   <div class="row">
-     <p>
 
-     </p>
-   </div>
-   <div class="row">
-     <center>
+
+
 
 
      <a data-pin-do="buttonFollow" href="https://www.pinterest.com/edpdx/">edpdx</a>
