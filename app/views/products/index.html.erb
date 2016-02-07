@@ -33,8 +33,13 @@
 
     <!-- Page Content -->
     <div class="container">
+      <div class="row">
+        <center>
+          <%= image_tag 'logo2.png', height: '250', width: '300' %>
+        </center>
+      </div>
 
-        <!-- Page Heading -->
+        <!-- Page Heading
         <div class="row">
             <div class="col-lg-12">
                 <h1 class="page-header">Products
@@ -46,12 +51,34 @@
                   <% end %>
                 </h1>
             </div>
-        </div>
+        </div> -->
         <!-- /.row -->
 
-        </tbody>
+        <% x = 1 %>
+        <% @products.each do |product| %>
+          <% if x == 1 %>
+            <div class="row">
+          <% end %>
+            <div class="col-sm-4">
+              <%= link_to product do %>
+                <% Photo.where(:product_id => product.id, :is_main => 't').each do |photo| %>
+                  <%= image_tag photo.avatar.url(:large), class: "img-responsive", alt: photo.product.name %>
+                <% end %>
+              <% end %>
+            </div>
+            <% if x == 3 %>
+              </div>
+              <p>
+
+              </p>
+              <% x = 1 %>
+            <% else %>
+              <% x = x + 1 %>
+            <% end %>
+        <% end %>
+
+<!--
       <% @products.each do |product| %>
-        <!-- Project One -->
         <div class="row">
             <div class="col-md-7">
               <%= link_to product do %>
@@ -68,11 +95,13 @@
                 <a class="btn btn-primary" href="/products/<%= product.id %>">View item</a>
             </div>
         </div>
-        <!-- /.row -->
 
         <hr>
       <% end %>
-
+    -->
+<p>
+  
+</p>
 
     <!-- jQuery -->
     <script src="js/jquery.js"></script>
