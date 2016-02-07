@@ -6,8 +6,8 @@ Rails.application.routes.draw do
   end
   resources :baskets
   #get 'welcome/index'
-  root 'products#index'
-  #root 'welcome#index'
+  #root 'products#index'
+  root 'welcome#index'
   get 'charges/create'
 
   namespace :hq do
