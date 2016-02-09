@@ -48,9 +48,10 @@
     <% x = 1 %>
     <% y = 1 %>
     <% rowmax = @products.count/3 %>
+    <div class="row">
     <% @products.each do |product| %>
       <% if x == 1 %>
-        <div class="row">
+
       <% end %>
         <div class="col-sm-4 col-xs-12">
           <%= link_to product do %>
@@ -60,10 +61,10 @@
           <% end %>
         </div>
         <% if x == 3 %>
-          </div>
+          <!--</div>
           <p>
 
-          </p>
+          </p>-->
           <% x = 1 %>
           <% y = y + 1 %>
           <% if y > rowmax %>
