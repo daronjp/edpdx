@@ -3,7 +3,7 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  
+
 </p>
 
 <div class="row">
@@ -18,7 +18,7 @@
 </div>
 
 <div class="row">
-  <div class="col-sm-1">
+  <div class="col-sm-1 col-xs-1">
   </div>
   <div class="col-sm-3 col-xs-10">
     <p>
@@ -50,9 +50,8 @@
   </div>
   <div class="col-xs-1">
   </div>
-    <p>
-    </p>
-  <div class="col-xs-1"></div>
+  <div class="col-xs-1"><p>
+  </p></div>
   <div class="col-sm-7 col-xs-10">
     <% @photo.each do |photo| %>
       <%= image_tag photo.avatar.url(:xlarge), class: "img-responsive", alt: photo.product.name %>
