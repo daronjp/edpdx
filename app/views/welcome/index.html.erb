@@ -52,10 +52,10 @@
       <% if x == 1 %>
         <div class="row">
       <% end %>
-        <div class="col-xs-4">
+        <div class="col-sm-4 col-xs-12">
           <%= link_to product do %>
             <% Photo.where(:product_id => product.id, :is_main => 't').each do |photo| %>
-              <%= image_tag photo.avatar.url(:large), class: "img-responsive", alt: photo.product.name %>
+              <%= image_tag photo.avatar.url(:large), class: "img-responsive", alt: photo.product.name %>&nbsp;
             <% end %>
           <% end %>
         </div>
