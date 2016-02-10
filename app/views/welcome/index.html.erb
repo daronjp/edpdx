@@ -57,14 +57,11 @@
           <%= link_to product do %>
             <% Photo.where(:product_id => product.id, :is_main => 't').each do |photo| %>
               <%= image_tag photo.avatar.url(:large), class: "img-responsive", alt: photo.product.name %>
-            <% end %>&nbsp;
+            <% end %>
           <% end %>
+          &nbsp;
         </div>
         <% if x == 3 %>
-          <!--</div>
-          <p>
-
-          </p>-->
           <% x = 1 %>
           <% y = y + 1 %>
           <% if y > rowmax %>
