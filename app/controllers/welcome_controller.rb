@@ -6,5 +6,18 @@ class WelcomeController < ApplicationController
                        :view => 'index',
                        :ip => request.remote_ip)
     end
+
+     @carts = Cart.where("active = 't' and (extract(epoch from now()) - (extract(epoch from updated_at))) > 43200")
+     @carts.each do |cart|
+       cart.active = 'f'
+       cart.save
+       @cart_items = CartItem.where(:cart_id => cart.id)
+       @cart_items.each do |item|
+         Product.update(item.product.id, :quantity => item.product.quantity + item.quantity)
+       end
+     end
+
+
+
   end
 end
