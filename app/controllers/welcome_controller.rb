@@ -14,6 +14,7 @@ class WelcomeController < ApplicationController
        @cart_items = CartItem.where(:cart_id => cart.id)
        @cart_items.each do |item|
          Product.update(item.product.id, :quantity => item.product.quantity + item.quantity)
+         item.delete
        end
      end
 
