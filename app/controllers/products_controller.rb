@@ -9,7 +9,8 @@ class ProductsController < ApplicationController
     unless session[:visitor] == 'admin'
       Galileo.create(:controller => 'product',
                        :view => 'index',
-                       :ip => request.remote_ip)
+                       :ip => request.remote_ip,
+                       :referrer => request.referer)
     end
 
 

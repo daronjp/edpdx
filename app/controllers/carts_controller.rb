@@ -35,7 +35,8 @@ class CartsController < ApplicationController
       Galileo.create(:controller => 'cart',
                        :view => 'show',
                        :ip => request.remote_ip,
-                       :object => session[:cart])
+                       :object => session[:cart],
+                       :referrer => request.referer)
     end
   end
 

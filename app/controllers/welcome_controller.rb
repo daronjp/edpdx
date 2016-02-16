@@ -4,7 +4,8 @@ class WelcomeController < ApplicationController
     unless session[:visitor] == 'admin'
       Galileo.create(:controller => 'welcome',
                        :view => 'index',
-                       :ip => request.remote_ip)
+                       :ip => request.remote_ip,
+                       :referrer => request.referer)
     end
 
      @carts = Cart.where("active = 't' and (extract(epoch from now()) - (extract(epoch from updated_at))) > 43200")
