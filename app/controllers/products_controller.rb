@@ -43,7 +43,7 @@ class ProductsController < ApplicationController
     if params[:var] == 'add_to_cart'
       if session[:cart]
         if session[:cart] == ''
-          cart = Cart.create()
+          cart = Cart.create(:active => 't')
           session[:cart] = cart.id
           # CartItem.create(:product_id => params[:id],
           #               :quantity => 1,
@@ -55,7 +55,7 @@ class ProductsController < ApplicationController
           #               :cart_id => session[:cart])
         end
       else
-        cart = Cart.create()
+        cart = Cart.create(:active => 't')
         session[:cart] = cart.id
         # CartItem.create(:product_id => params[:id],
         #               :quantity => 1,

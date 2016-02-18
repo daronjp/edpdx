@@ -12,9 +12,13 @@
     width: 30%;
   }
   </style>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+  <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 
+  <% @cats = ProductCategory.joins("inner join products on product_categories.id = products.product_category_id").
+    where("quantity > 0").select(:category).distinct %>
   <% if session[:cart] %>
     <% if session[:cart] == '' %>
       <% cart = Cart.create(:active => 't') %>
@@ -48,21 +52,37 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <!--<li class="active">-->
-        <li class="<%= 'active' if params[:controller] == 'products' and params[:type].nil? %>">
+        <li class="<%= 'active' if params[:controller] == 'products' %>">
           <!--<a href="#">LinkActive <span class="sr-only">(current)</span></a>-->
           <%= link_to "Products", products_path %>
         </li>
+        <!--
         <li class="<%= 'active' if params[:controller] == 'products' and params[:type] == 'cutting_boards' %>">
-          <!--<a href="#">LinkActive <span class="sr-only">(current)</span></a>-->
           <% if params[:controller] != 'hq/users' and params[:controller] != 'hq/shipments' %>
             <%= link_to 'Cutting Boards', controller: "products", action: "index", type: 'cutting_boards' %>
           <% end %>
         </li>
         <li class="<%= 'active' if params[:controller] == 'products' and params[:type] == 'tasters' %>">
-          <!--<a href="#">LinkActive <span class="sr-only">(current)</span></a>-->
+          <!--<a href="#">LinkActive <span class="sr-only">(current)</span></a>
           <% if params[:controller] != 'hq/users' and params[:controller] != 'hq/shipments' %>
             <%= link_to 'Tasting Trays', controller: "products", action: "index", type: 'tasters' %>
           <% end %>
+        </li>-->
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Produt Categories <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <% @cats.each do |cat| %>
+              <li><%= link_to cat.category, controller: "products", action: "index", type: cat.category %></li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">About <span class="caret"></span></a>
+          <ul class="dropdown-menu">
+            <li><a href="https://www.pinterest.com/edpdx">Pinterest</a></li>
+            <li><a href="https://www.twitter.com/edpdx_goods">Twitter</a></li>
+            <li><a>support@edpdx.com</a></li>
+          </ul>
         </li>
         <% if session[:visitor] == 'admin' %>
           <li class="<%= 'active' if params[:controller] == 'photos' %>">

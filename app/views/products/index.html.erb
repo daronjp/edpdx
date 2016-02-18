@@ -76,7 +76,11 @@
               <% x = x + 1 %>
             <% end %>
         <% end %> -->
-
+      <% if params[:type].nil? %>
+        <h2>Products</h2>
+      <% else %>
+        <h2><%= params[:type] %></h2>
+      <% end %>
 
       <% @products.each do |product| %>
         <div class="row">
