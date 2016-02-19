@@ -44,10 +44,14 @@
       <p>
 
       </p>
-
-    <a class="btn btn-success" href="/products/<%= @product.id %>/?var=add_to_cart">Add to cart</a>
+    <% if @product.quantity == 0 %>
+      <a class="btn btn-success" href="/products/<%= @product.id %>/?var=add_to_cart">Add to cart</a>
+    <% else %>
+      <h3>Out of stock</h3>
+      Please contact us at support@edpdx.com for more information about when this product will be back in stock.
+    <% end %>
     <p>
-      
+
     </p>
   </div>
 
