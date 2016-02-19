@@ -44,7 +44,7 @@
       <p>
 
       </p>
-    <% if @product.quantity == 0 %>
+    <% if @product.quantity > 0 %>
       <a class="btn btn-success" href="/products/<%= @product.id %>/?var=add_to_cart">Add to cart</a>
     <% else %>
       <h3>Out of stock</h3>
