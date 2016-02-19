@@ -21,7 +21,7 @@
 <body>
 
   <% @cats = ProductCategory.joins("inner join products on product_categories.id = products.product_category_id").
-    where("quantity > 0").select(:category).distinct %>
+    where("quantity > 0").group("product_categories.id, category") %>
   <% if session[:cart] %>
     <% if session[:cart] == '' %>
       <% cart = Cart.create(:active => 't') %>
@@ -76,7 +76,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Produt Categories <span class="caret"></span></a>
             <ul class="dropdown-menu">
               <% @cats.each do |cat| %>
-                <li><%= link_to cat.category, controller: "products", action: "index", type: cat.category %></li>
+                <li><%= link_to cat.category, controller: "products", action: "index", type: cat.id %></li>
               <% end %>
             </ul>
           </li>

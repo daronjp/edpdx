@@ -79,7 +79,7 @@
       <% if params[:type].nil? %>
         <h2>Products</h2>
       <% else %>
-        <h2><%= params[:type] %></h2>
+        <h2><%= ProductCategory.find(params[:type]).category %></h2>
       <% end %>
 
       <% @products.each do |product| %>

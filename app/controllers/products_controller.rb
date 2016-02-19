@@ -16,12 +16,14 @@ class ProductsController < ApplicationController
 
     if params[:type].nil?
       @products = Product.where("quantity > 0")
-    elsif params[:type] == 'cutting_boards'
-      @products = Product.where("quantity > 0 and product_category_id = 1")
-    elsif params[:type] == 'tasters'
-      @products = Product.where("quantity > 0 and product_category_id = 2")
     else
-      @products = Product.where("quantity > 0")
+      @products = Product.where("product_category_id = ?", params[:type])
+    # elsif params[:type] == 'cutting_boards'
+    #   @products = Product.where("quantity > 0 and product_category_id = 1")
+    # elsif params[:type] == 'tasters'
+    #   @products = Product.where("quantity > 0 and product_category_id = 2")
+    # else
+    #   @products = Product.where("quantity > 0")
     end
     @expired = Cart.where("active = 't' and updated_at <= now() - interval '1 day'")
     #reset_session
