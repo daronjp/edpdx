@@ -80,6 +80,11 @@
         <h2>Products</h2>
       <% else %>
         <h2><%= ProductCategory.find(params[:type]).category %></h2>
+        <% if ProductCategory.find(params[:type]).category == 'Cutting Boards' %>
+          <p style="font-size:16px;"">
+            Don't see your state? Contact us at support@edpdx to request your state.
+          </p>
+        <% end %>
       <% end %>
 
       <% @products.each do |product| %>
