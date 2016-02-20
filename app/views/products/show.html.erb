@@ -1,3 +1,15 @@
+<head>
+  <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
+    <meta property="og:type" content="product" />
+    <meta property="og:title" content="<%= @product.name %>" />
+    <meta property="og:description" content="<%= @product.description %>" />
+    <meta property="og:url" content="https://www.edpdx.com/products/<%= params[:id] %>" />
+    <meta property="og:site_name" content="EDPDX" />
+    <meta property="og:price:amount" content="<%= @product.price %>" />
+    <meta property="og:price:currency" content="USD" />
+    <meta property="og:availability" content="<% if @product.quantity > 0 %>instock<% else %>out of stock<% end %>" />
+</head>
+
 <script async defer src="//assets.pinterest.com/js/pinit.js"></script>
 
 <p id="notice"><%= notice %></p>
