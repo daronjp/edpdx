@@ -56,7 +56,7 @@
     <% @photo.each do |photo| %>
       <% if photo.is_main? %>
         <!-- just some comments -->
-        <a data-pin-do="buttonPin" data-pin-color="red" href="https://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.edpdx.com%2Fproducts%2F<% params[:id] %>&media=https%3A%2F%2Fedpdxprod.s3.amazonaws.com%2Fphotos%2Favatars%2F<%= (photo.id/100).floor %>00%2F<%= (photo.id/100).floor %>00%2F<% if photo.id < 100 %>0<%= photo.id %><% else %><%= photo.id %><% end %>%2Flarge%2F<%= photo.avatar_file_name %>&description=<%= URI.escape(@product.name) %>"><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png" /></a>
+        <a data-pin-do="buttonPin" data-pin-color="red" href="https://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.edpdx.com%2Fproducts%2F<% params[:id] %>&media=https%3A%2F%2Fedpdxprod.s3.amazonaws.com%2Fphotos%2Favatars%2F<%= (photo.id/100).floor %>00%2F<%= (photo.id/100).floor %>00%2F<% if photo.id < 100 %>0<%= photo.id %><% else %><%= photo.id %><% end %>%2Flarge%2F<%= photo.avatar_file_name %>&description=<%= URI.escape(@product.name) %>" target=new><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png" /></a>
       <% end %>
     <% end %>
   </div>
