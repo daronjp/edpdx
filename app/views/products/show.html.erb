@@ -5,7 +5,7 @@
     <meta property="og:description" content="<%= @product.description %>" />
     <meta property="og:url" content="https://www.edpdx.com/products/<%= params[:id] %>" />
     <meta property="og:site_name" content="EDPDX" />
-    <meta property="og:price:amount" content="<%= @product.price %>" />
+    <meta property="og:price:amount" content="<%= sprintf('%.2f', @product.price) %>" />
     <meta property="og:price:currency" content="USD" />
     <meta property="og:availability" content="<% if @product.quantity > 0 %>instock<% else %>out of stock<% end %>" />
 </head>
