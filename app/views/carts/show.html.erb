@@ -65,16 +65,17 @@
               <td>
                 $<%= sprintf('%.2f', item.product.price*item.quantity) %>
               </td>
-              <td>
-                <%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-danger" %>
-                <% if item.product.quantity > 0 %>
-                  <%= link_to 'Add one', increment_path(item), class: "btn btn-success" %>
-                <% end %>
-                <% if item.quantity > 1 %>
-                  <%= link_to 'Remove one', decrement_path(item), class: "btn btn-warning" %>
-                <% end %>
-
-              </td>
+              <% if @cart.active? %>
+                <td>
+                  <%= link_to 'Remove', item, method: :delete, data: { confirm: 'Are you sure?'}, class: "btn btn-danger" %>
+                  <% if item.product.quantity > 0 %>
+                    <%= link_to 'Add one', increment_path(item), class: "btn btn-success" %>
+                  <% end %>
+                  <% if item.quantity > 1 %>
+                    <%= link_to 'Remove one', decrement_path(item), class: "btn btn-warning" %>
+                  <% end %>
+                </td>
+              <% end %>
             </tr>
           <% total = total + (item.product.price*item.quantity) %>
         <% end %>
@@ -113,6 +114,8 @@
         <%= hidden_field_tag 'cents', (total*100).to_i %>
         <% if @cart.shipped? %>
           <%= @cart.shipping_vendor %> tracking number: <%= @cart.tracking_id %>
+        <% elsif @cart.purchase? %>
+          Thanks for your order! We'll send an email when your items ship.
         <% else %>
           <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                   data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
