@@ -98,6 +98,6 @@ class PhotosController < ApplicationController
     def photo_params
       # params.require(:photo).permit(:product_id, :image_url, :is_main)
       ## ^^ original
-      params.require(:photo).permit(:avatar, :name, :product_id, :is_main, :orientation)
+      params.require(:photo).permit(:avatar, :name, :product_id, :is_main, :orientation, :sorting)
     end
 end

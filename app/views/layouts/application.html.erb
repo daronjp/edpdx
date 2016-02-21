@@ -17,7 +17,7 @@
   <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>-->
   <script src="javascripts/jquery_paste.js"></script>
   <!--<script src="javascripts/bootstrap_paste.js"></script>-->
-  <% if params[:controller] == 'products' and params.has_key?(:id) %>
+  <% if params[:controller] == 'products' and params.has_key?(:id) and params[:action] != 'edit' %>
     <meta property="og:type" content="product" />
     <meta property="og:title" content="<%= @product.name %>" />
     <meta property="og:description" content="<%= @product.description %>" />
@@ -115,9 +115,6 @@
             <li><a href="https://www.twitter.com/edpdx_goods">Twitter</a></li>
             <li><a>support@edpdx.com</a></li>
             <li><%= link_to 'About Us', about_path %></li>
-            <li>
-              <%= link_to 'Test', test_path %></li>
-            </li>
           </ul>
         </li>
         <% if session[:visitor] == 'admin' %>

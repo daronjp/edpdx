@@ -40,7 +40,7 @@ class ProductsController < ApplicationController
     end
 
 
-    @photo = Photo.where(:product_id => params[:id])
+    @photo = Photo.where(:product_id => params[:id]).order(:sorting)
     @product_note = ProductNote.where(:product_id => params[:id])
     if params[:var] == 'add_to_cart'
       if session[:cart]
@@ -85,7 +85,7 @@ class ProductsController < ApplicationController
   # GET /products/1/edit
   def edit
     @photo = Photo.new
-    @stock = Photo.where(:product_id => params[:id])
+    @stock = Photo.where(:product_id => params[:id]).order(:sorting)
     @product_note = ProductNote.new
     @notes = ProductNote.where(:product_id => params[:id])
   end

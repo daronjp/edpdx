@@ -18,6 +18,12 @@
     </div>
   </div>
   <div class="form-group">
+    <%= f.label :sorting, class: 'col-sm-2 control-label' %>
+    <div class="col-sm-4">
+      <%= f.number_field :sorting, class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
     <%= f.label :image_url, class: 'col-sm-2 control-label' %>
     <div class="col-sm-4">
       <%= f.text_field :image_url, class: 'form-control' %>
