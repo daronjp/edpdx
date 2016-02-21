@@ -14,7 +14,9 @@
       <%# form_for(@stock) do |f| %>
         <% @stock.each do |stock| %>
           <%# f.radio_button :is_main %>
-          <%= image_tag stock.avatar.url(:thumb) %>
+          <%= link_to edit_photo_path(stock) do %>
+            <%= image_tag stock.avatar.url(:thumb) %>
+          <% end %>
         <% end %>
       <%# end %>
     <% end %>
