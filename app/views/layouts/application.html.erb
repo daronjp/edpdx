@@ -18,14 +18,19 @@
   <script src="javascripts/jquery_paste.js"></script>
   <!--<script src="javascripts/bootstrap_paste.js"></script>-->
   <% if params[:controller] == 'products' and params.has_key?(:id) %>
-  <meta property="og:type" content="product" />
-  <meta property="og:title" content="<%= @product.name %>" />
-  <meta property="og:description" content="<%= @product.description %>" />
-  <meta property="og:url" content="https://www.edpdx.com/products/<%= params[:id] %>" />
-  <meta property="og:site_name" content="EDPDX" />
-  <meta property="og:price:amount" content="<%= sprintf('%.2f', @product.price) %>" />
-  <meta property="og:price:currency" content="USD" />
-  <meta property="og:availability" content="<% if @product.quantity > 0 %>instock<% else %>out of stock<% end %>" />
+    <meta property="og:type" content="product" />
+    <meta property="og:title" content="<%= @product.name %>" />
+    <meta property="og:description" content="<%= @product.description %>" />
+    <meta property="og:url" content="https://www.edpdx.com/products/<%= params[:id] %>" />
+    <meta property="og:site_name" content="EDPDX" />
+    <meta property="og:price:amount" content="<%= sprintf('%.2f', @product.price) %>" />
+    <meta property="og:price:currency" content="USD" />
+    <meta property="og:availability" content="<% if @product.quantity > 0 %>instock<% else %>out of stock<% end %>" />
+    <% @photo.each do |photo| %>
+      <% if photo.is_main? %>
+        <meta property="og:image" content="<% photo.avatar.url(:xlarge) %>" />
+      <% end %>
+    <% end %>
   <% end %>
 </head>
 <body>
