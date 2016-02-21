@@ -45,7 +45,7 @@
 
 
   <% @cats = ProductCategory.joins("inner join products on product_categories.id = products.product_category_id").
-    where("quantity > 0").group("product_categories.id, category") %>
+    where("quantity > 0").group("product_categories.id, category").order(:sorting, :category) %>
   <% if session[:cart] %>
     <% if session[:cart] == '' %>
       <% cart = Cart.create(:active => 't') %>
