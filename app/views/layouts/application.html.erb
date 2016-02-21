@@ -28,7 +28,7 @@
     <meta property="og:availability" content="<% if @product.quantity > 0 %>instock<% else %>out of stock<% end %>" />
     <% @photo.each do |photo| %>
       <% if photo.is_main? %>
-        <meta property="og:image" content="<% photo.avatar.url(:xlarge) %>" />
+        <meta property="og:image:url" content="<% photo.avatar.url(:xlarge) %>" />
       <% end %>
     <% end %>
   <% end %>
