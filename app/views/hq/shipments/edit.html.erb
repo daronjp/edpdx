@@ -29,7 +29,7 @@
       <h5>Cart Details:</h5>
       Items:
       <% @cart.cart_items.each do |item| %>
-        <%= item.product.name %><br>
+        <%= item.product.name %> - $<%= item.product.price %> x <%= item.quantity %> units<br>
       <% end %>
 
       Purchased: <%= @cart.purchase %><br>

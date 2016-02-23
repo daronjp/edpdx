@@ -55,8 +55,8 @@
           <td>
           <% total = 0 %>
           <% shipment.cart_items.each do |item| %>
-            <%= item.product.name %><br>
-            <% total = total + item.product.price %>
+            <%= item.product.name %> - <%= item.product.price %> x <%= item.quantity %><br>
+            <% total = total + (item.product.price*item.quantity) %>
           <% end %>
           </td>
           <td>
