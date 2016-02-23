@@ -11,7 +11,7 @@ class UserMailer < ApplicationMailer
       @cart = cart
       @total = total
       @items = CartItem.where(:cart_id => @cart.id)
-      mail(to: cust.email, subject: 'Your purchase from edpdx.com')
+      mail(to: cust.email, bcc: 'eimee.rivera@gmail.com', subject: 'Your purchase from edpdx.com')
     end
 
     def shipment_email(cust, cart)
