@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   get '/cart_items/increment/:id', to: 'cart_items#increment', :as => 'increment'
   get '/cart_items/decrement/:id', to: 'cart_items#decrement', :as => 'decrement'
   get '/about' => 'welcome#about'
+  get '/custom_projects' => 'welcome#custom_projects'
   get '/test' => 'welcome#test'
   # get "cart_items/increment/:id" => "cart_items#increment"
   # The priority is based upon order of creation: first created -> highest priority.
