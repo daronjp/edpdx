@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   resources :photos
   resources :products
   resources :products
+  resources :projects
   resources :welcome
   resources :sessions
   resources :charges
@@ -31,6 +32,7 @@ Rails.application.routes.draw do
   get '/about' => 'welcome#about'
   get '/custom_projects' => 'welcome#custom_projects'
   get '/test' => 'welcome#test'
+  get '/succulent' => 'projects#succulent'
   # get "cart_items/increment/:id" => "cart_items#increment"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
