@@ -7,8 +7,8 @@ class WelcomeController < ApplicationController
                        :ip => request.remote_ip,
                        :referrer => request.referer)
     end
-
-     @carts = Cart.where("active = 't' and (extract(epoch from now()) - (extract(epoch from updated_at))) > 43200")
+    ## remove items from abandoned carts
+     @carts = Cart.where("active = 't' and (extract(epoch from now()) - (extract(epoch from updated_at))) > 14400")
      @carts.each do |cart|
        cart.active = 'f'
        cart.save
