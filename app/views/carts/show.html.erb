@@ -18,7 +18,9 @@
   <div class="col-md-1">
   </div>
   <div class="col-md-11">
-    <font color="red"><%= notice %><% flash.discard %></font>
+    <% sql = "select round((extract(epoch from '2016-04-23 00:00:00'::TIMESTAMP) - extract(epoch from now()))/86400) as q" %>
+    <% result = ActiveRecord::Base.connection.execute(sql) %>
+    <h2><font color="red"><b><%= notice %><% flash.discard %>There is currently a <%= result[0]['q'] %> day delay in shipping items.</b></font></h2>
     <h1>Your Cart</h1>
   </div>
 </div>
