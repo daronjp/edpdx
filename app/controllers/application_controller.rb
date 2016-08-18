@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   private
 
   def no_bot
-    if request.remote_ip == '82.80.249.166'
+    if ['82.80.249.166', '82.80.230.228'].include? request.remote_ip
       redirect_to 'http://www.google.com'
     end
   end
