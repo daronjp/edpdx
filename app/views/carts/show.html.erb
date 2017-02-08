@@ -18,16 +18,16 @@
   <div class="col-md-1">
   </div>
   <div class="col-md-11">
-    <%# sql = "select round((extract(epoch from '2016-11-28 00:00:00'::TIMESTAMP) - extract(epoch from now()))/86400) as q" %>
-    <%# result = ActiveRecord::Base.connection.execute(sql) %>
+    <% sql = "select round((extract(epoch from '2017-02-21 00:00:00'::TIMESTAMP) - extract(epoch from now()))/86400) as q" %>
+    <% result = ActiveRecord::Base.connection.execute(sql) %>
     <h2>
       <font color="red">
         <b>
           <%= notice %>
           <% flash.discard %>
-          <!-- There is currently a -->
-          <%# result[0]['q'] %>
-          <!-- day delay in shipping items. -->
+          There is currently a
+          <%= result[0]['q'] %>
+          day delay in shipping items.
         </b>
       </font>
     </h2>
