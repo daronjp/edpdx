@@ -1,8 +1,11 @@
 class ProductsController < ApplicationController
-  before_filter :gate_keeper
+  before_filter :gate_keeper, :meao
   skip_before_filter :gate_keeper, only: [:index, :show]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
+  def meao
+    @cats = CATS
+  end
   # GET /products
   # GET /products.json
   def index
@@ -15,16 +18,28 @@ class ProductsController < ApplicationController
 
 
     if params[:type].nil?
-      @products = Product.where("quantity > 0")
+      @products = LISTINGS
     else
-      @products = Product.where("quantity > 0 and product_category_id = ?", params[:type])
+      @products = Array.new
+      LISTINGS['results'].each do |x|
+        if x['taxonomy_path'].last == params[:type]
+          @products.push(x)
+        end
+      end
+    end
+
+    @images = Hash.new
+    @products.each do |x|
+      @images[x['listing_id'].to_s] = HTTParty.get("https://openapi.etsy.com/v2/listings/"+x['listing_id'].to_s+"/images?api_key="+ENV['ETSY_API'])
+    end
+      # @products = Product.where("quantity > 0 and product_category_id = ?", params[:type])
     # elsif params[:type] == 'cutting_boards'
     #   @products = Product.where("quantity > 0 and product_category_id = 1")
     # elsif params[:type] == 'tasters'
     #   @products = Product.where("quantity > 0 and product_category_id = 2")
     # else
     #   @products = Product.where("quantity > 0")
-    end
+    # end
     @expired = Cart.where("active = 't' and updated_at <= now() - interval '1 day'")
     #reset_session
   end

@@ -54,7 +54,7 @@
 }(document, 'script', 'facebook-jssdk'));</script>
 
 
-  <% @cats = ProductCategory.joins("inner join products on product_categories.id = products.product_category_id").
+  <%# @cats = ProductCategory.joins("inner join products on product_categories.id = products.product_category_id").
     where("quantity > 0").group("product_categories.id, category").order(:sorting, :category) %>
   <% if session[:cart] %>
     <% if session[:cart] == '' %>
@@ -113,7 +113,7 @@
             </a>
             <ul class="dropdown-menu">
               <% @cats.each do |cat| %>
-                <li><%= link_to cat.category, controller: "products", action: "index", type: cat.id %></li>
+                <li><%= link_to cat, controller: "products", action: "index", type: cat %></li>
               <% end %>
             </ul>
           </li>

@@ -1,4 +1,11 @@
 class WelcomeController < ApplicationController
+
+  before_filter :meao
+
+  def meao
+    @cats = CATS
+  end
+
   def index
     @products = Product.joins(:photos).where("quantity > 0 and is_main = 't' and orientation = 'horizontal'").order("RANDOM()")
     unless session[:visitor] == 'admin'
@@ -18,12 +25,12 @@ class WelcomeController < ApplicationController
          item.delete
        end
      end
-
-     @listings =  HTTParty.get("https://openapi.etsy.com/v2/shops/13283678/listings/active?api_key="+ENV['ETSY_API'])
-     @image = HTTParty.get("https://openapi.etsy.com/v2/listings/"+@listings['results'][0]['listing_id'].to_s+"/images?api_key="+ENV['ETSY_API'])
+    @listings = LISTINGS
+    @image = HTTParty.get("https://openapi.etsy.com/v2/listings/"+@listings['results'][0]['listing_id'].to_s+"/images?api_key="+ENV['ETSY_API'])
 
   end
 
   def about
   end
+
 end
