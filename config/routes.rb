@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get '/custom_projects' => 'welcome#custom_projects'
   get '/test' => 'welcome#test'
   get 'project/succulent' => 'projects#succulent', :as => 'succulent'
+  get 'project/raven' => 'projects#raven', :as => 'raven'
   # get "cart_items/increment/:id" => "cart_items#increment"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

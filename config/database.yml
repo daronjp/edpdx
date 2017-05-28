@@ -8,11 +8,11 @@ development:
 test:
   adapter: postgresql
   database: edp_test
-  username: ewryan
-  password: moomoofarm
+  username:
+  password:
 
 production:
   adapter: postgresql
   database: edp_production
-  username: ewryan
-  password: moomoofarm
+  username:
+  password: 
