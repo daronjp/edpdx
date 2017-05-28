@@ -19,7 +19,8 @@ class WelcomeController < ApplicationController
        end
      end
 
-
+     @listings =  HTTParty.get("https://openapi.etsy.com/v2/shops/13283678/listings/active?api_key="+ENV['ETSY_API'])
+     @image = HTTParty.get("https://openapi.etsy.com/v2/listings/"+@listings['results'][0]['listing_id'].to_s+"/images?api_key="+ENV['ETSY_API'])
 
   end
 
