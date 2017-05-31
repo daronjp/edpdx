@@ -26,7 +26,7 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 gem "bcrypt", :require => "bcrypt"
-
+gem 'httparty'
 gem 'stripe'
 
 gem 'paperclip', '4.2.1'

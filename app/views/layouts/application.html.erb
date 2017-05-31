@@ -29,16 +29,17 @@
   <!--<script src="javascripts/bootstrap_paste.js"></script>-->
   <% if params[:controller] == 'products' and params.has_key?(:id) and params[:action] != 'edit' %>
     <meta property="og:type" content="product" />
-    <meta property="og:title" content="<%= @product.name %>" />
-    <meta property="og:description" content="<%= @product.description %>" />
+    <meta property="og:title" content="<%= @product['results'][0]['title'] %>" />
+    <meta property="og:description" content="<%= @product['results'][0]['description'] %>" />
     <meta property="og:url" content="https://www.edpdx.com/products/<%= params[:id] %>" />
     <meta property="og:site_name" content="EDPDX" />
-    <meta property="og:price:amount" content="<%= sprintf('%.2f', @product.price) %>" />
+    <meta property="og:price:amount" content="<%= sprintf('%.2f', @product['results'][0]['price']) %>" />
     <meta property="og:price:currency" content="USD" />
-    <meta property="og:availability" content="<% if @product.quantity > 0 %>instock<% else %>out of stock<% end %>" />
-    <% @photo.each do |photo| %>
-      <% if photo.is_main? %>
-        <meta property="og:image" content="<%= photo.avatar.url(:xlarge) %>" />
+    <meta property="og:availability" content="<% if @product['results'][0]['quantity'] > 0 %>instock<% else %>out of stock<% end %>" />
+    <% x = 0 %>
+    <% @images['results'].each do |photo| %>
+      <% if x == 0 %>
+        <meta property="og:image" content="<%= photo['url_170x135'].to_s %>" />
       <% end %>
     <% end %>
   <% end %>
@@ -89,10 +90,10 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <!--<li class="active">-->
-        <li class="<%= 'active' if params[:controller] == 'products' %>">
+        <!-- <li class="<%= 'active' if params[:controller] == 'products' %>"> -->
           <!--<a href="#">LinkActive <span class="sr-only">(current)</span></a>-->
-          <%= link_to "Products", products_path %>
-        </li>
+          <%# link_to "Products", products_path %>
+        <!-- </li> -->
         <!--
         <li class="<%= 'active' if params[:controller] == 'products' and params[:type] == 'cutting_boards' %>">
           <% if params[:controller] != 'hq/users' and params[:controller] != 'hq/shipments' %>
@@ -148,14 +149,6 @@
           </li>
         <% end %>
 
-      <% if session[:cart] %>
-
-      <li class="<%= 'active' if params[:controller] == 'carts' %>">
-        <%= link_to cart_path(session[:cart]) do %>
-          Your Cart
-          (<%= CartItem.where(cart_id: session[:cart]).sum(:quantity) %>)
-        <% end %></li>
-      <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if session[:visitor] == 'admin' %>

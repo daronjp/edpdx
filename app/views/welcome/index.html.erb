@@ -44,31 +44,31 @@
 
     <% x = 1 %>
     <% y = 1 %>
-    <% rowmax = @products.count/3 %>
-    <div class="row">
-    <% @products.each do |product| %>
-      <% if x == 1 %>
+    <% rowmax = 3 %>
+    <center>
+      <div class="row">
+      <% @img.each do |product| %>
+        <% if x == 1 %>
 
-      <% end %>
-        <div class="col-sm-4 col-xs-12">
-          <%= link_to product do %>
-            <% Photo.where(:product_id => product.id, :is_main => 't').each do |photo| %>
-              <%= image_tag photo.avatar.url(:large), class: "img-responsive", alt: photo.product.name %>
-            <% end %>
-          <% end %>
-          &nbsp;
-        </div>
-        <% if x == 3 %>
-          <% x = 1 %>
-          <% y = y + 1 %>
-          <% if y > rowmax %>
-            <% break %>
-          <% end %>
-        <% else %>
-          <% x = x + 1 %>
         <% end %>
-    <% end %>
-    </div>
+          <div class="col-sm-12 col-xs-12">
+            <%= link_to "products/"+@listings['results'][product]['listing_id'].to_s do %>
+              <%= image_tag @image[@listings['results'][product]['listing_id'].to_s]['results'][0]['url_fullxfull'], class: "img-responsive", alt: @listings['results'][product]['title'], width: '550' %>
+            <% end %>
+            &nbsp;
+          </div>
+          <% if x == 3 %>
+            <% x = 1 %>
+            <% y = y + 1 %>
+            <% if y > rowmax %>
+              <% break %>
+            <% end %>
+          <% else %>
+            <% x = x + 1 %>
+          <% end %>
+      <% end %>
+      </div>
+    </center>
 
 
 
@@ -79,12 +79,6 @@
        </p>
      </div>
    </div>
-
-<%= image_tag @image['results'][0]['url_570xN'] %>
-<%= @listings['results'][0]['title'] %>
-<%= @cats %>
-
-
 
 
     <!-- jQuery -->

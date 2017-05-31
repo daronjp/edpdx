@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   before_filter :gate_keeper, :meao
   skip_before_filter :gate_keeper, only: [:index, :show]
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action only: [:show, :edit, :update, :destroy]
 
   def meao
     @cats = CATS
@@ -54,42 +54,13 @@ class ProductsController < ApplicationController
                        :object => params[:id])
     end
 
+    @product = HTTParty.get("https://openapi.etsy.com/v2/listings/"+params[:id].to_s+"?api_key="+ENV['ETSY_API'])
+    @images = HTTParty.get("https://openapi.etsy.com/v2/listings/"+params[:id].to_s+"/images?api_key="+ENV['ETSY_API'])
 
-    @photo = Photo.where(:product_id => params[:id]).order(:sorting)
-    @product_note = ProductNote.where(:product_id => params[:id])
-    if params[:var] == 'add_to_cart'
-      if session[:cart]
-        if session[:cart] == ''
-          cart = Cart.create(:active => 't')
-          session[:cart] = cart.id
-          # CartItem.create(:product_id => params[:id],
-          #               :quantity => 1,
-          #               :cart_id => cart.id)
-          #session[:cart] = Time.now.to_f()
-        else
-          # CartItem.create(:product_id => params[:id],
-          #               :quantity => 1,
-          #               :cart_id => session[:cart])
-        end
-      else
-        cart = Cart.create(:active => 't')
-        session[:cart] = cart.id
-        # CartItem.create(:product_id => params[:id],
-        #               :quantity => 1,
-        #               :cart_id => cart.id)
-      end
+    # @photo = Photo.where(:product_id => params[:id]).order(:sorting)
+    # @product_note = ProductNote.where(:product_id => params[:id])
 
-    quantity = Product.where(:id => params[:id])
-    if quantity[0].quantity > 0
-      CartItem.create(:product_id => params[:id],
-                      :quantity => 1,
-                      :cart_id => session[:cart])
-      Product.update(quantity, :quantity => quantity[0].quantity - 1)
-    end
-
-    redirect_to cart_path(session[:cart])
       #redirect_to action: show, id: params[:id], var: ''
-    end
   end
 
   # GET /products/new
@@ -147,12 +118,12 @@ class ProductsController < ApplicationController
 
   private
     # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
+    # def set_product
+    #   @product = Product.find(params[:id])
+    # end
 
     # Never trust parameters from the scary internet, only allow the white list through.
-    def product_params
-      params.require(:product).permit(:name, :price, :height, :width, :quantity, :description, :product_category_id, :length)
-    end
+    # def product_params
+    #   params.require(:product).permit(:name, :price, :height, :width, :quantity, :description, :product_category_id, :length)
+    # end
 end
