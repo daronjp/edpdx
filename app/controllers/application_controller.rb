@@ -3,6 +3,18 @@ class ApplicationController < ActionController::Base
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
 
+  unless defined? LISTINGS
+    LISTINGS = HTTParty.get("https://openapi.etsy.com/v2/shops/13283678/listings/active?api_key="+ENV['ETSY_API'])
+  end
+
+  unless defined? CATS
+    CATS = Array.new
+    LISTINGS['results'].each do |x|
+      CATS.push(x['taxonomy_path'].last)
+    end
+    CATS = CATS.uniq
+  end
+
   before_filter :no_bot
 
   private

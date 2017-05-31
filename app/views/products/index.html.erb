@@ -39,48 +39,12 @@
         </center>
       </div>
 
-        <!-- Page Heading
-        <div class="row">
-            <div class="col-lg-12">
-                <h1 class="page-header">Products
-                  <% if params[:type] == 'cutting_boards' %>
-                    <small>Cutting Boards</small>
-                  <% elsif params[:type] == 'tasters' %>
-                    <small>Tasting Trays</small>
-                  <% else %>
-                  <% end %>
-                </h1>
-            </div>
-        </div> -->
-        <!-- /.row -->
-<!--
-        <% x = 1 %>
-        <% @products.each do |product| %>
-          <% if x == 1 %>
-            <div class="row">
-          <% end %>
-            <div class="col-sm-4">
-              <%= link_to product do %>
-                <% Photo.where(:product_id => product.id, :is_main => 't').each do |photo| %>
-                  <%= image_tag photo.avatar.url(:large), class: "img-responsive", alt: photo.product.name %>
-                <% end %>
-              <% end %>
-            </div>
-            <% if x == 3 %>
-              </div>
-              <p>
 
-              </p>
-              <% x = 1 %>
-            <% else %>
-              <% x = x + 1 %>
-            <% end %>
-        <% end %> -->
       <% if params[:type].nil? %>
         <h2>Products</h2>
       <% else %>
-        <h2><%= ProductCategory.find(params[:type]).category %></h2>
-        <% if ProductCategory.find(params[:type]).category == 'Cutting Boards' %>
+        <h2><%= params[:type] %></h2>
+        <% if params[:type] == 'Cutting Boards' %>
           <p style="font-size:16px;"">
             Don't see your state? Contact us at support@edpdx to request your state.
           </p>
@@ -90,21 +54,20 @@
       <% @products.each do |product| %>
         <div class="row">
             <div class="col-md-7">
-              <%= link_to product do %>
-                <% Photo.where(:product_id => product.id, :is_main => 't').each do |photo| %>
-                  <%= image_tag photo.avatar.url(:xlarge), class: "img-responsive", alt: photo.product.name %>
-                <% end %>
-              <% end %>
+              <%= image_tag @images[product['listing_id'].to_s]['results'][0]['url_570xN'] %>
+              <%# link_to product do %>
+                <%# Photo.where(:product_id => product.id, :is_main => 't').each do |photo| %>
+                  <%# image_tag photo.avatar.url(:xlarge), class: "img-responsive", alt: photo.product.name %>
+                <%# end %>
+              <%# end %>
             </div>
             <div class="col-md-5">
-              <%= product.photos[0]['image_url'] %>
-                <h3><%= product.name %></h3>
-                <h4>$<%= sprintf('%.2f', product.price) %></h4>
-                <p><%= product.description %></p>
-                <a class="btn btn-primary" href="/products/<%= product.id %>">View item</a>
+                <h3><%= product['title'] %></h3>
+                <h4>$<%= sprintf('%.2f', product['price']) %></h4>
+                <p><%= product['description'].gsub("\n", "<br>").html_safe %></p>
+                <a class="btn btn-primary" href="/products/<%= product['listing_id'] %>">View item</a>
             </div>
-        </div>
-
+        </div>  <%#sdf%>
         <hr>
       <% end %>
 

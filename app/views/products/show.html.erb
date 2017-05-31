@@ -15,7 +15,7 @@
   <div class="col-xs-11">
 
   <p>
-    <h3><%= @product.name %> - $<%= sprintf('%.2f', @product.price) %></h3>
+    <h3><%= @product['results'][0]['title'] %> - $<%= sprintf('%.2f', @product['results'][0]['price']) %></h3>
   </p>
   </div>
 </div>
@@ -24,30 +24,11 @@
   </div>
   <div class="col-md-3 col-xs-11">
     <p>
-      <strong>Description:</strong>
-      <%= @product.description %>
+      <%= @product['results'][0]['description'].gsub("\n", "<br>").html_safe %>
     </p>
-    <% if @product_note.count > 0 %>
-      <p>
-        <strong>Notes:</strong>
-        <ul>
-          <% @product_note.each do |product_note| %>
-            <li><%= product_note.note %></li>
-          <% end %>
-        </ul>
-      </p>
-    <% end %>
-
-    <p>
-      <strong>Dimensions:</strong><br>
-      Height: <%= @product.height %><br>
-      Width: <%= @product.width %><br>
-      Length: <%= @product.length %><br>
-      <p>
 
       </p>
-    <% if @product.quantity > 0 %>
-      <a class="btn btn-success" href="/products/<%= @product.id %>/?var=add_to_cart">Add to cart</a>
+    <% if @product['results'][0]['quantity'] > 0 %>
     <% else %>
       <h3>Out of stock</h3>
       Please contact us at support@edpdx.com for more information about when this product will be back in stock.
@@ -58,15 +39,18 @@
     <table>
       <tr>
         <td>
-          <% @photo.each do |photo| %>
-            <% if photo.is_main? %>
-              <!-- just some comments -->
-              <a data-pin-do="buttonPin" data-pin-color="red" href="https://www.pinterest.com/pin/create/button/?url=https%3A%2F%2Fwww.edpdx.com%2Fproducts%2F<%= params[:id] %>&media=https%3A%2F%2Fedpdxprod.s3.amazonaws.com%2Fphotos%2Favatars%2F000%2F000%2F<% if photo.id < 100 %>0<%= photo.id %><% else %><%= photo.id %><% end %>%2Flarge%2F<%= photo.avatar_file_name %>&description=<%= URI.escape(@product.name) %>" target=new><img src="//assets.pinterest.com/images/pidgets/pinit_fg_en_rect_red_20.png" /></a>
-            <% end %>
-          <% end %></td><td>
-            &nbsp;
           </td><td valign="top">
             <div class="fb-share-button" data-href="https://www.edpdx.com/products/<%= params[:id] %>" data-layout="button"></div>
+          </td>
+        </td>
+      </tr>
+      <tr height=10>
+
+      </tr>
+      <tr>
+        <td>
+          <td>
+            <a class="btn btn-primary" href=<%= @product['results'][0]['url'] %> target=new>Purchase from our Etsy store</a>
           </td>
         </td>
       </tr>
@@ -76,8 +60,8 @@
   <div class="col-xs-1">
   </div>
   <div class="col-md-6 col-xs-10">
-    <% @photo.each do |photo| %>
-      <%= image_tag photo.avatar.url(:xlarge), class: "img-responsive", alt: photo.product.name %>
+    <% @images['results'].each do |photo| %>
+      <%= image_tag photo['url_570xN'], class: "img-responsive", alt: @product['description'] %>
       <p>
       </p>
     <% end %>
